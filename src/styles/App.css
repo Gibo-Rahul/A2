@@ -1281,7 +1281,145 @@ body {
   }
 }
 
-/* Utility Classes */
+/* API Status and Error Handling */
+.api-status {
+  position: fixed;
+  top: 70px;
+  right: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  font-size: 0.875rem;
+  font-weight: 600;
+  z-index: 1000;
+  transition: var(--transition);
+}
+
+.api-status.connected {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--success);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.api-status.disconnected {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--warning);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.error-banner {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: var(--error);
+  padding: 1rem 2rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+.error-banner button {
+  background: none;
+  border: none;
+  color: var(--error);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 1rem;
+}
+
+.demo-badge {
+  background: var(--warning);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--border-radius);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.demo-notice {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+.out-of-stock-warning {
+  font-size: 0.75rem;
+  color: var(--error);
+  font-weight: 600;
+}
+
+.checkout-warning {
+  font-size: 0.875rem;
+  color: var(--error);
+  text-align: center;
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+
+/* Loading States */
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid var(--border);
+  border-radius: 50%;
+  border-top-color: var(--primary-color);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.loading-card {
+  background: var(--surface);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.loading-card-image {
+  height: 250px;
+  background: var(--border);
+}
+
+.loading-card-content {
+  padding: 1.5rem;
+}
+
+.loading-line {
+  height: 1rem;
+  background: var(--border);
+  border-radius: var(--border-radius);
+  margin-bottom: 0.75rem;
+}
+
+.loading-line.short {
+  width: 60%;
+}
+
+.loading-line.medium {
+  width: 80%;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
 .text-center { text-align: center; }
 .text-left { text-align: left; }
 .text-right { text-align: right; }
