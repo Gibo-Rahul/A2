@@ -8,28 +8,15 @@ const CartModal = ({
   updateQuantity, 
   removeFromCart, 
   getTotalPrice, 
-  setCurrentPage,
-  handleCheckout,
-  isAPIConnected
+  setCurrentPage 
 }) => {
   if (!showCart) return null;
-
-  const calculateTax = () => {
-    return Math.round(getTotalPrice() * 0.18);
-  };
-
-  const calculateTotal = () => {
-    return getTotalPrice() + calculateTax();
-  };
 
   return (
     <div className="modal-overlay" onClick={() => setShowCart(false)}>
       <div className="cart-modal" onClick={(e) => e.stopPropagation()}>
         <div className="cart-header">
           <h3>YOUR CART</h3>
-          {!isAPIConnected && (
-            <span className="demo-badge">Demo Mode</span>
-          )}
           <button className="close-btn" onClick={() => setShowCart(false)}>
             <X size={24} />
           </button>
@@ -57,16 +44,13 @@ const CartModal = ({
                 {cart.map(item => (
                   <div key={item.id} className="cart-item">
                     <img 
-                      src={item.image || item.image_url} 
+                      src={item.image} 
                       alt={item.name}
                       className="cart-item-image"
                     />
                     <div className="cart-item-info">
                       <h6>{item.name}</h6>
                       <div className="cart-item-price">₹{item.price}</div>
-                      {!item.inStock && (
-                        <span className="out-of-stock-warning">Out of Stock</span>
-                      )}
                     </div>
                     <div className="quantity-controls">
                       <button
@@ -100,34 +84,16 @@ const CartModal = ({
                 </div>
                 <div className="summary-row">
                   <span>Tax (18%):</span>
-                  <span>₹{calculateTax()}</span>
+                  <span>₹{Math.round(getTotalPrice() * 0.18)}</span>
                 </div>
                 <hr className="summary-divider" />
                 <div className="summary-row total">
                   <strong>Total:</strong>
-                  <strong>₹{calculateTotal()}</strong>
+                  <strong>₹{getTotalPrice() + Math.round(getTotalPrice() * 0.18)}</strong>
                 </div>
-                
-                {/* Checkout Button */}
-                <button 
-                  className="checkout-btn"
-                  onClick={handleCheckout}
-                  disabled={cart.some(item => !item.inStock)}
-                >
-                  {isAPIConnected ? 'PROCEED TO CHECKOUT' : 'CHECKOUT (DEMO)'}
+                <button className="checkout-btn">
+                  PROCEED TO CHECKOUT
                 </button>
-                
-                {cart.some(item => !item.inStock) && (
-                  <p className="checkout-warning">
-                    Please remove out-of-stock items before checkout
-                  </p>
-                )}
-                
-                {!isAPIConnected && (
-                  <p className="demo-notice">
-                    Running in demo mode - no real transactions
-                  </p>
-                )}
               </div>
             </>
           )}
